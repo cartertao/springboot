@@ -1,0 +1,15 @@
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- 进行Mybatis的相应的环境的属性定义 -->
+    <settings>   <!-- 在本项目中开启二级缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+<!--    <typeAliases>
+        <package name="com.example.demo.bean"/>
+    </typeAliases>-->
+<!--    <typeAliases>
+        <typeAlias type="com.example.demo.bean.TestBean" alias="testBean"/>
+    </typeAliases>-->
+</configuration>

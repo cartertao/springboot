@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间指向接口类 -->
+<mapper namespace="com.example.demo.dao.TestDao">
+    <!-- id唯一标识，用来被程序调用 ，rusultType返回值类型，如果是对象则指向实体类-->
+    <select id="get" resultType="testBean">
+        select seq from if_ord_sts_trigger
+    </select>
+</mapper>
