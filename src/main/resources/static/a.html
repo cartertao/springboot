@@ -1,0 +1,114 @@
+<html>
+<head>
+    <script type="text/javascript" src="/js/jquery.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/js/md5.js" charset="utf-8"></script>
+</head>
+<body>
+    <form id="form" action="/t1" enctype="multipart/form-data">
+        FILE<input type="file" name="file"  id="file"/>
+    </form>
+    <button id="submit1">submit1</button></br>
+    <button id="submit2">submit2</button></br>
+    <button id="submit3">submit3</button></br>
+    <div style="background: red;width: 10px;height: 50px;"></div>
+</body>
+
+<script>
+    // 二进制文件和数据一起传输
+    $("#submit1").click(function(){
+        var form = $("#form")[0];
+        var data = new FormData(form);
+        data.append("name","test");
+        go(data);
+    })
+
+    //base64
+    $("#submit2").click(function(){
+        var file = document.getElementById('file').files[0] //上传文件的对象
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(e) {
+            var base64 = e.target.result;
+            go1("base64=" + base64);
+        }
+    })
+
+    //断点续传
+         // 文件切块大小为1MB
+    const chunkSize = 1024 * 1024 * 3;
+    $("#submit3").click(function(){
+        upload();
+    })
+
+    function upload(){
+        var file = document.getElementById('file').files[0] //上传文件的对象
+        var max = file.size;
+        var chunks = parseInt(max/chunkSize) + 1;
+
+        for(i =1;i<chunks +1;i++){
+            var start = (i - 1) * chunkSize;    //起始位置
+            if(start > max){
+                return;
+            }
+            var end = (start + chunkSize > max) ? max : (start + chunkSize); //判断最后一块以及末尾位置
+
+            var data = new FormData();
+            var md5 = hex_md5(file);
+
+            data.append("md5",md5);
+            data.append("size",max);
+            data.append("chunks",chunks);
+            data.append("chunk",i);
+            data.append('file',file.slice(start,end));
+            data.append("name",file.name);
+            go2(data);
+        }
+    }
+
+    function go(data){
+        $.ajax({
+            type:"post",
+            url:"/t1",
+            data:data,
+            enctype:"multipart/form-data",
+            processData:false,
+            contentType:false,
+            cache:false,
+            dataType:"json",
+            success:function(msg){
+                alert(msg);
+            }
+        })
+    }
+
+    function go1(data){
+        $.ajax({
+            type:"post",
+            url:"/t2",
+            data:data,
+            dataType:"json",
+            success:function(msg){
+                alert(msg);
+            }
+        })
+    }
+
+    //同步发送
+    function go2(data){
+        $.ajax({
+            type:"post",
+            url:"/upload",
+            data:data,
+            enctype:"multipart/form-data",
+            processData:false,
+            contentType:false,
+            cache:false,
+            async:false,
+            dataType:"json",
+            success:function(msg){
+
+            }
+        })
+    }
+</script>
+</html>

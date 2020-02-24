@@ -8,4 +8,17 @@
     <select id="get" resultType="testBean">
         select seq from if_ord_sts_trigger
     </select>
+
+    <insert id="insert">
+        insert aatest(age) values(10)
+    </insert>
+
+    <update id="update">
+        update aatest set id =1 where id =2
+    </update>
+
+    <insert id="call" statementType="CALLABLE">
+        {call p_test()}
+    </insert>
+
 </mapper>
