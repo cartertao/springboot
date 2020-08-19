@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间指向接口类 -->
+<mapper namespace="com.springboot.tao.dao.StudentMapper">
+    <select id="selectByName" parameterType="string" resultType="Student">
+        select * from student where name = #{value}
+    </select>
+</mapper>
