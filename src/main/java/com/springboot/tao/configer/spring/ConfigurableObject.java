@@ -1,4 +1,4 @@
-package com.springboot.tao.configer;
+package com.springboot.tao.configer.spring;
 
 import com.springboot.tao.bean.db.Student;
 import com.springboot.tao.services.StudentService;

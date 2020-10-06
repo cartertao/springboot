@@ -1,4 +1,4 @@
-package com.springboot.tao.bean;
+package com.springboot.tao.bean.spring;
 
 import lombok.Data;
 

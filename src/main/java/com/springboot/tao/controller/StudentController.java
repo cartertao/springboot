@@ -1,7 +1,7 @@
 package com.springboot.tao.controller;
 
 import com.springboot.tao.bean.db.Student;
-import com.springboot.tao.configer.ConfigurableObject;
+import com.springboot.tao.configer.spring.ConfigurableObject;
 import com.springboot.tao.services.impl.StudentServiceImpl;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;

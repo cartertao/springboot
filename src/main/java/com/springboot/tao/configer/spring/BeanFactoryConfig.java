@@ -1,6 +1,5 @@
-package com.springboot.tao.configer;
+package com.springboot.tao.configer.spring;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

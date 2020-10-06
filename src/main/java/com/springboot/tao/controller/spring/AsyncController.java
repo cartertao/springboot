@@ -1,4 +1,4 @@
-package com.springboot.tao.controller;
+package com.springboot.tao.controller.spring;
 
 import com.springboot.tao.bean.db.Student;
 import com.springboot.tao.other.AsyncTask;

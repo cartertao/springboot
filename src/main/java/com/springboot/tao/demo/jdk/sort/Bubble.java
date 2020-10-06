@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Bubble {
 
     public static void main(String[] args) {
-        test2();
+        test1();
     }
 
     /**
@@ -18,6 +18,9 @@ public class Bubble {
      * 两个相邻的元素直接比较大小(符合条件则相邻两个替换位置)
      */
     public static void test1(){
+        String refundOrderNo = "20092917261881C1";
+        String seq = refundOrderNo.substring(refundOrderNo.indexOf('C') + 1);
+        System.out.println(seq);
         int[] arr = {4,5,6,3,2,1};
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length - i - 1; j++) {

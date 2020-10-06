@@ -1,7 +1,7 @@
-package com.springboot.tao.controller;
+package com.springboot.tao.controller.spring;
 
-import com.springboot.tao.bean.FactoryBeanTest;
-import com.springboot.tao.configer.FactoryBeanConfig;
+import com.springboot.tao.bean.spring.FactoryBeanTest;
+import com.springboot.tao.configer.spring.FactoryBeanConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;

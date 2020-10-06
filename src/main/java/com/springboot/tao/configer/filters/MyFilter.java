@@ -8,7 +8,7 @@ import java.io.IOException;
  * @author taozhiwei
  * @date 2020/8/13 13:47
  */
-@WebFilter(urlPatterns = "/*", filterName = "myFilter")
+//@WebFilter(urlPatterns = "/*", filterName = "myFilter")
 public class MyFilter implements Filter {
 
     @Override

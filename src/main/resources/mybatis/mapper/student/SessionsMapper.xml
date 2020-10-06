@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间指向接口类 -->
+<mapper namespace="com.springboot.tao.dao.SessionsMapper">
+    <insert id="insertSessions" parameterType="list">
+        insert into sessions values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id}, #{item.session})
+        </foreach>
+    </insert>
+
+    <update id="updateSessions" parameterType="sessions">
+        update sessions set session = #{session} where id in
+        <foreach collection="sessionList" item="item" index="index" open="(" close=")" separator=",">
+            #{item.id}
+        </foreach>
+    </update>
+</mapper>

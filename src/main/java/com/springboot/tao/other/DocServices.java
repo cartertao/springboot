@@ -1,4 +1,4 @@
-package com.springboot.tao.services.impl;
+package com.springboot.tao.other;
 
 import com.springboot.tao.bean.db.Student;
 import com.springboot.tao.dao.StudentMapper;

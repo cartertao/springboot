@@ -1,6 +1,6 @@
-package com.springboot.tao.configer;
+package com.springboot.tao.configer.spring;
 
-import com.springboot.tao.bean.FactoryBeanTest;
+import com.springboot.tao.bean.spring.FactoryBeanTest;
 import org.springframework.beans.factory.FactoryBean;
 
 /**

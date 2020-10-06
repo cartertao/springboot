@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  * @author taozhiwei
  * @date 2020/7/27 18:05
@@ -18,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/swagger")
 public class SwaggerController {
 
-    @ApiOperation(value = "方法解释", notes = "notes", httpMethod = "get")
+    @ApiOperation(value = "方法解释", notes = "notes", httpMethod = "Get")
     @GetMapping("/doc")
     @ApiResponses(value = { @ApiResponse(code = 1000, message = "成功"),
                             @ApiResponse(code = 1001, message = "失败"),
@@ -31,8 +34,13 @@ public class SwaggerController {
         return student;
     }
 
-    @GetMapping("/swagger")
-    public String doc(){
-        return "redirect:swagger-ui.html";
+    @GetMapping("/ui")
+    public void doc(HttpServletResponse response) throws IOException {
+        //因为用了@RestController 导致redirect失效
+        //需要注意的是此时url是http://localhost:8080/swagger/ui
+        //response.sendRedirect("swagger-ui.html")  跳转  http://localhost:8080/swagger/swagger-ui.html
+        //response.sendRedirect("/swagger-ui.html") 跳转  http://localhost:8080/swagger-ui.html
+        //return "redirect:swagger-ui.html";
+        response.sendRedirect("/swagger-ui.html");
     }
 }
