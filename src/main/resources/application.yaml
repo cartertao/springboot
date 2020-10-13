@@ -1,15 +1,15 @@
 
 spring:
   datasource:
-    url: jdbc:mysql://49.233.18.164:3306/test?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://58.87.83.245:24311/test?characterEncoding=utf8&useSSL=true&serverTimezone=UTC
     driverClassName: com.mysql.cj.jdbc.Driver
     username: root
-    password: 123456
+    password: qwer1234.
   redis:
     database: 0
-    host: apc-innismall-stg-redis.redis.cache.chinacloudapi.cn
+    host: 10.231.96.6
     port: 6379
-    password: pRK7HxSwaGZPumJm6OGoNp2vZobjzXO0+SslBkkTIRE=
+    password: e3Rhb&5ha8dIP4_yB
     ssl: false
     timeout: 5000
 #    cluster:
