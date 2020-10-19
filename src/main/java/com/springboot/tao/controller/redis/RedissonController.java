@@ -9,6 +9,7 @@ import org.redisson.client.codec.Codec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.SerializationUtils;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +34,7 @@ public class RedissonController {
     @Autowired
     RedissonClient redissonClient;
 
-    @RequestMapping("/getKey")
+    @GetMapping("/getKey")
     public void getKeys(){
         RKeys keys = redissonClient.getKeys();
         Iterable<String> keys1 = keys.getKeys();
@@ -48,7 +49,7 @@ public class RedissonController {
 
     /***************************通用对象key:value***********************************/
 
-    @RequestMapping("/save/{key}/{value}")
+    @GetMapping("/save/{key}/{value}")
     public void saveValue(@PathVariable("key")String key, @PathVariable("value")String value){
         RBucket<Object> obj = redissonClient.getBucket(key);
         //如果存在则赋值
@@ -61,7 +62,7 @@ public class RedissonController {
         boolean tao11 = obj.setIfExists("exists" + value, 50, TimeUnit.SECONDS);
     }
 
-    @RequestMapping("/get")
+    @GetMapping("/get")
     public String getValue(){
         RBucket<Object> key = redissonClient.getBucket("key1");
         //获取值，不存在为null, 如果key二进制对象的key,则会抛出IO异常
@@ -99,14 +100,14 @@ public class RedissonController {
         return (String)o;
     }
 
-    @RequestMapping("/get/{key}")
+    @GetMapping("/get/{key}")
     public String get1(@PathVariable("key")String key){
         RBucket<Object> keyValue = redissonClient.getBucket(key);
         Object o = keyValue.get();
         return  (String)o;
     }
 
-    @RequestMapping("/gets")
+    @GetMapping("/gets")
     public Map<String, Object> gets(){
         RBuckets buckets = redissonClient.getBuckets();
         //获取多个key的value映射，如果所有key都不存在map不会为null，只是元素为0，
@@ -125,7 +126,7 @@ public class RedissonController {
 
     /***************************二进制流***********************************/
 
-    @RequestMapping("/binary/test")
+    @GetMapping("/binary/test")
     public void binaryStream() throws IOException {
         RBinaryStream stream = redissonClient.getBinaryStream("anyStream");
         //想要保存的二进制流
@@ -157,7 +158,7 @@ public class RedissonController {
     /**
      * long
      */
-    @RequestMapping("/atomicLong/test")
+    @GetMapping("/atomicLong/test")
     public long rAtomicLong(){
         RAtomicLong atomicLong = redissonClient.getAtomicLong("myAtomicLong");
         //这个set没法设置过期时间
@@ -183,7 +184,7 @@ public class RedissonController {
      * 累加器LongAdder java.util.concurrent.atomic.LongAdder
      * 性能最高比分布式AtomicLong对象快 12000 倍
      */
-    @RequestMapping("/longAdder/test")
+    @GetMapping("/longAdder/test")
     public void longAdder(){
         //不用初始值，初始为0
         RLongAdder atomicLong = redissonClient.getLongAdder("myLongAdder");
@@ -199,7 +200,7 @@ public class RedissonController {
     /**
      * Double
      */
-    @RequestMapping("/atomicDouble/test")
+    @GetMapping("/atomicDouble/test")
     public void atomicDouble(){
         RAtomicDouble atomicDouble = redissonClient.getAtomicDouble("myAtomicDouble");
         atomicDouble.set(2.81);
@@ -212,7 +213,7 @@ public class RedissonController {
      * 双精度浮点累加器 DoubleAdder
      * 其性能最高比分布式AtomicDouble对象快 12000 倍
      */
-    @RequestMapping("/doubleAdder/test")
+    @GetMapping("/doubleAdder/test")
     public void doubleAdder(){
         //不用初始值，初始为0
         RDoubleAdder myLongDouble = redissonClient.getDoubleAdder("myLongDouble");
@@ -236,7 +237,7 @@ public class RedissonController {
      * patternTopic -> client client client
      */
 
-    @RequestMapping("/topicListener/test")
+    @GetMapping("/topicListener/test")
     public void topicListener(){
         //创建订阅者，为订阅者添加监听器
         RTopic topic = redissonClient.getTopic("anyTopic");
@@ -275,7 +276,7 @@ public class RedissonController {
         });
     }
 
-    @RequestMapping("/topicPublish/test")
+    @GetMapping("/topicPublish/test")
     public long topicPublish(){
         RTopic topic = redissonClient.getTopic("anyTopic");
         Student student = new Student(1, "tao", 888);
@@ -298,7 +299,7 @@ public class RedissonController {
         topic.removeListenerAsync(1,2);
         return clientsReceivedMessage;
     }
-    @RequestMapping("/topicPublish/test1")
+    @GetMapping("/topicPublish/test1")
     public void topicPublish1(){
         RTopic topic = redissonClient.getTopic("anyTopic");
         Sessions session = new Sessions("123", "sessionmmmmm");
@@ -307,7 +308,7 @@ public class RedissonController {
 
     /***************************布隆过滤器 Bloom Filter***********************************/
 
-    @RequestMapping("/bloomFilter/test")
+    @GetMapping("/bloomFilter/test")
     public void bloomFilter(){
         RBloomFilter<Student> bloomFilter = redissonClient.getBloomFilter("sample");
         // 初始化布隆过滤器，预计统计元素数量为55000000，期望误差率为0.03
@@ -322,7 +323,7 @@ public class RedissonController {
 
     /***************************基数估计算法 hyperLogLog***********************************/
 
-    @RequestMapping("/hyperLogLog/test")
+    @GetMapping("/hyperLogLog/test")
     public long hyperLogLog(){
         RHyperLogLog<Student> log = redissonClient.getHyperLogLog("hyperStudent");
         log.add(new Student(1, "tao1", 11));
@@ -341,7 +342,7 @@ public class RedissonController {
      * 先进先出 无边界（没有指定大小容量）Queue，
      * 尽管RQueue对象无初始大小（边界）限制，但对象的最大容量受Redis限制，最大元素数量是4 294 967 295个
      */
-    @RequestMapping("/queue/insert")
+    @GetMapping("/queue/insert")
     public void queue(){
         RQueue<Student> queue = redissonClient.getQueue("queue");
         queue.add(new Student(3, "tao1", 11));
@@ -350,7 +351,7 @@ public class RedissonController {
         queue.add(new Student(1, "tao1", 11));
     }
 
-    @RequestMapping("/queue/get")
+    @GetMapping("/queue/get")
     public Student queueGet(){
         RQueue<Student> queue = redissonClient.getQueue("queue");
         //获取单不移除队列的头，如果队列为null则返回null
@@ -363,7 +364,7 @@ public class RedissonController {
     /**
      * 双端队列Deque
      */
-    @RequestMapping("/deque/insert")
+    @GetMapping("/deque/insert")
     public void dequeInsert() {
         RDeque<Student> queue = redissonClient.getDeque("anyDeque");
         queue.addFirst(new Student(3, "tao1", 11));
@@ -372,7 +373,7 @@ public class RedissonController {
         queue.addLast(new Student(6, "tao1", 11));
         queue.expire(60, TimeUnit.SECONDS);
     }
-    @RequestMapping("/deque/get")
+    @GetMapping("/deque/get")
     public Student dequeGet(){
         RDeque<Student> queue = redissonClient.getDeque("anyDeque");
         Iterator<Student> iterator = queue.iterator();
@@ -408,7 +409,7 @@ public class RedissonController {
      * 阻塞队列常用于生产者和消费者的场景，生产者是向队列里添加元素的线程，消费者是从队列里取元素的线程。
      * 阻塞队列就是生产者用来存放元素、消费者用来获取元素的容器
      */
-    @RequestMapping("/blockingQueue/insert")
+    @GetMapping("/blockingQueue/insert")
     public void blockingQueue() throws InterruptedException {
         RBlockingQueue<Student> queue = redissonClient.getBlockingQueue("anyQueue");
         queue.offer(new Student());
@@ -422,7 +423,7 @@ public class RedissonController {
     /**
      * 有界阻塞队列（Bounded Blocking Queue）
      */
-    @RequestMapping("/boundedBlockingQueue/insert")
+    @GetMapping("/boundedBlockingQueue/insert")
     public void boundedBlockingQueue() throws InterruptedException {
         RBoundedBlockingQueue<Student> queue = redissonClient.getBoundedBlockingQueue("anyQueue");
         queue.expire(30, TimeUnit.SECONDS);
@@ -442,7 +443,7 @@ public class RedissonController {
     /**
      * 阻塞双端队列（Blocking Deque）
      */
-    @RequestMapping("/blockingDeque/insert")
+    @GetMapping("/blockingDeque/insert")
     public void blockingDeque() throws InterruptedException {
         RBlockingDeque<Integer> deque = redissonClient.getBlockingDeque("anyDeque");
         deque.putFirst(1);
@@ -458,7 +459,7 @@ public class RedissonController {
      * Java对象在实现了RQueue接口的基础上提供了向队列按要求延迟添加项目的功能。
      * 该功能可以用来实现消息传送延迟按几何增长或几何衰减的发送策略。
      */
-    @RequestMapping("/delayedQueue/insert")
+    @GetMapping("/delayedQueue/insert")
     public void delayedQueue() throws InterruptedException {
         //先指定一个其他类型队列
         RBlockingDeque<Student> blockingDeque = redissonClient.getBlockingDeque("anyDeque");

@@ -36,6 +36,7 @@ import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.ScoreSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,14 +53,14 @@ public class ElasticSearchController {
     @Autowired
     private RestHighLevelClient restHighLevelClient;
 
-    @RequestMapping("/info")
+    @GetMapping("/info")
     public void info() throws IOException {
         //获取索引信息
         CountRequest request = new CountRequest("index2");
 
     }
 
-    @RequestMapping("/insert")
+    @GetMapping("/insert")
     public void insert() throws IOException {
         //插入数据
         Map<String, Object> jsonMap = new HashMap<>();
@@ -117,7 +118,7 @@ public class ElasticSearchController {
         }
     }
 
-    @RequestMapping("/select")
+    @GetMapping("/select")
     public Map<String, Object> select() throws IOException {
         //读取数据
         GetRequest getData = new GetRequest("index5", "5");
@@ -125,7 +126,7 @@ public class ElasticSearchController {
         return getResponse.getSource();
     }
 
-    @RequestMapping("/update")
+    @GetMapping("/update")
     public void update() throws IOException {
         //更新数据
         UpdateRequest request = new UpdateRequest("index", "2");
@@ -133,7 +134,7 @@ public class ElasticSearchController {
         System.out.println(updateResponse);
     }
 
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     public void delete() throws IOException {
         //删除
         DeleteRequest request = new DeleteRequest("index", "2");
@@ -141,7 +142,7 @@ public class ElasticSearchController {
         System.out.println(delete);
     }
 
-    @RequestMapping("/search")
+    @GetMapping("/search")
     public void search(){
 
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();

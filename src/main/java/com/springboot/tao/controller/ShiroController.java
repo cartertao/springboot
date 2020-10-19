@@ -8,9 +8,7 @@ import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +28,7 @@ public class ShiroController {
     @Autowired
     SessionsMapper sessionsMapper;
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String login(HttpServletRequest request) {
         String msg = "";
         String userName = request.getParameter("userName");//判断是否为空
@@ -74,12 +72,12 @@ public class ShiroController {
         return "test1";
     }
 
-    @RequestMapping("/admin")
+    @GetMapping("/admin")
     public String admins(){
         return "admin";
     }
 
-    @RequestMapping("/select")
+    @GetMapping("/select")
     public String select(HttpServletRequest request, HttpServletResponse response){
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
@@ -93,46 +91,46 @@ public class ShiroController {
         return "select";
     }
 
-    @RequestMapping("/update")
+    @GetMapping("/update")
     @RequiresPermissions(value = {"user:update"})
     public String update(){
         return "update";
     }
 
-    @RequestMapping("/unAuthorized")
+    @GetMapping("/unAuthorized")
     public String unAuthorized(){
         return "unAuthorized";
     }
 
-    @RequestMapping("/session/get/{id}")
+    @GetMapping("/session/get/{id}")
     public Sessions getSession(@PathVariable("id")String id){
         return sessionsMapper.selectById(id);
     }
 
-    @RequestMapping("/session/update/{id}")
+    @GetMapping("/session/update/{id}")
     public int updateById(@PathVariable("id")String id){
         Sessions sessions = new Sessions(id, "updateSession" + id);
         return sessionsMapper.updateById(sessions);
     }
 
-    @RequestMapping("/session/delete/{id}")
+    @GetMapping("/session/delete/{id}")
     public int deleteById(@PathVariable("id")String id){
         return sessionsMapper.deleteById(id);
     }
 
-    @RequestMapping("/session/insert/{id}")
+    @GetMapping("/session/insert/{id}")
     public int insertSession(@PathVariable("id")String id){
         Sessions sessions = new Sessions(id, "updateSession" + id);
         return sessionsMapper.insertSession(sessions);
     }
 
-    @RequestMapping("/session/inserts")
+    @GetMapping("/session/inserts")
     public int insertSessions(){
         List<Sessions> sessions = Arrays.asList(new Sessions("5", "updateSession5"), new Sessions("6", "updateSession6"));
         return sessionsMapper.insertSessions(sessions);
     }
 
-    @RequestMapping("/session/updates")
+    @GetMapping("/session/updates")
     public int updateSessions(){
         Sessions sessions1 = new Sessions(null, "value");
         List<Sessions> sessions = Arrays.asList(new Sessions("5", "updateSession5"), new Sessions("6", "updateSession6"));
@@ -140,13 +138,13 @@ public class ShiroController {
         return sessionsMapper.updateSessions(sessions1);
     }
 
-    @RequestMapping("/set/{value}")
+    @GetMapping("/set/{value}")
     public void setValue(HttpServletRequest request, @PathVariable("value")String value){
         HttpSession session = request.getSession();
         session.setAttribute("shiro", value);
     }
 
-    @RequestMapping("/get/value")
+    @GetMapping("/get/value")
     public String getValue(HttpServletRequest request){
         HttpSession session = request.getSession();
         return (String) session.getAttribute("shiro");

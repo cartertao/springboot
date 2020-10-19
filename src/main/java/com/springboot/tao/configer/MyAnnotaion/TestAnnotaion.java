@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * @author taozhiwei
  * @date 2020/8/14 13:24
  */
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TestAnnotaion {
 

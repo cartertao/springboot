@@ -1,9 +1,12 @@
 package com.springboot.tao.other;
 
 import com.springboot.tao.bean.db.Student;
+import com.springboot.tao.controller.MybatisController;
 import com.springboot.tao.dao.StudentMapper;
 import com.springboot.tao.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Random;
 
 /**
  * @author taozhiwei
@@ -32,7 +35,7 @@ public class DocServices implements StudentService {
      * {@link DocTest#mm()}
      * {@link DocTest#name}
      * 指定位置
-     * {@link com.springboot.tao.controller.StudentController}
+     * {@link MybatisController}
      */
     @Override
     @Deprecated
@@ -48,7 +51,7 @@ public class DocServices implements StudentService {
      * @see DocTest#mm()
      * @see DocTest#name
      * 指定位置
-     * @see com.springboot.tao.controller.StudentController#selectById(int)
+     * @see MybatisController#selectById(int)
      */
     public void doc1(String name) { }
 
@@ -63,4 +66,5 @@ public class DocServices implements StudentService {
      */
     @Deprecated
     public void doc4() { }
+
 }

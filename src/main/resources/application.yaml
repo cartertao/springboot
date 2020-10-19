@@ -1,10 +1,23 @@
 
 spring:
   datasource:
-    url: jdbc:mysql://58.87.83.245:24311/test?characterEncoding=utf8&useSSL=true&serverTimezone=UTC
-    driverClassName: com.mysql.cj.jdbc.Driver
-    username: root
-    password: qwer1234.
+    master:
+      url: jdbc:mysql://58.87.83.245:24311/test1?characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: root
+      password: qwer1234.
+    slave:
+      url: jdbc:mysql://58.87.83.245:24311/test?characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: root
+      password: qwer1234.
+#    url: jdbc:mysql://58.87.83.245:24311/test?characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: qwer1234.
+#读写分离配置
+
+
   redis:
     database: 0
     host: 10.231.96.6
@@ -22,9 +35,17 @@ spring:
 
 
 # mybatis
+#测试多数据源关闭单个数据源mybatis配置，如果要关闭多数据源则DbSourceConfig去掉@Config
+#mybatis:
+#  config-location: classpath:mybatis/config.xml
+#  mapper-locations: classpath*:mybatis/mapper/**/*.xml
+
+#多数据源配置
 mybatis:
-  config-location: classpath:mybatis/config.xml
-  mapper-locations: classpath*:mybatis/mapper/**/*.xml
+  typeAliasesPackage: com.springboot.tao.bean.db
+  mapperLocations: classpath*:mybatis/mapper/**/*.xml
+
+
 
 #elasticsearch
 elasticsearch:
@@ -43,3 +64,12 @@ server:
         max-age: 300m
       timeout: 60m
 
+#properties
+test1:
+  mysql:
+    name: taozhiwei1
+    password: 1111
+test2:
+  mysql:
+    name: taozhiwei2
+    password: 22222

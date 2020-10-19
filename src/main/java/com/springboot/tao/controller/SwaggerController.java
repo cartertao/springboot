@@ -21,7 +21,7 @@ import java.io.IOException;
 @RequestMapping("/swagger")
 public class SwaggerController {
 
-    @ApiOperation(value = "方法解释", notes = "notes", httpMethod = "Get")
+    @ApiOperation(value = "方法解释", notes = "notes", httpMethod = "GET")
     @GetMapping("/doc")
     @ApiResponses(value = { @ApiResponse(code = 1000, message = "成功"),
                             @ApiResponse(code = 1001, message = "失败"),

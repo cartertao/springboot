@@ -3,20 +3,22 @@ package com.springboot.tao.aop;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
  * @author taozhiwei
  * @date 2020/7/27 14:01
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class LogAop {
 
     @Pointcut("execution(* com.springboot.tao.controller.*.*(..))")
@@ -65,6 +67,9 @@ public class LogAop {
 
     @Around("puct()")
     public Object around(ProceedingJoinPoint point) throws Throwable{
+        //获取对应方法对象，可以操作注解
+        MethodSignature methodSignature = (MethodSignature) point.getSignature();
+        Method method = methodSignature.getMethod();
         System.out.println("------------around start-------");
         Object proceed = point.proceed();
         System.out.println("------------around end-------");

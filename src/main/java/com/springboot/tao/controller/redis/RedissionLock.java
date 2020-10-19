@@ -5,6 +5,7 @@ import org.redisson.api.RLock;
 import org.redisson.api.RReadWriteLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,7 @@ public class RedissionLock {
      * 也可以通过修改Config.lockWatchdogTimeout来另行指定
      * https://redis.io/topics/distlock
      */
-    @RequestMapping("/reentrantLock")
+    @GetMapping("/reentrantLock")
     public void reentrantLock() throws InterruptedException {
         RLock lock = redissonClient.getLock("anyLock");
         // 最常见的使用方法
@@ -62,7 +63,7 @@ public class RedissionLock {
      * 3.假设我们设置有效期是30秒，图中超时了两个redis节点。 那么加锁成功的节点总共花费了3秒，所以锁的实际有效期是小于27秒的,
      * 即扣除加锁成功三个实例的3秒，还要扣除等待超时redis实例的总共时间。
      */
-    @RequestMapping("/redLock")
+    @GetMapping("/redLock")
     public void redLock() throws InterruptedException {
         //RLock lock1 = redissonInstance1.getLock("lock1");
         //RLock lock2 = redissonInstance2.getLock("lock2");
