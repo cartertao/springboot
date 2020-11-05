@@ -29,6 +29,18 @@ public interface StudentMapper {
     @Update("update student set age = #{age} where id = 1")
     void testTransactionalSlave(int age);
 
+    @Update({"<script>",
+            "update Author",
+            "  <set>",
+            "    <if test='username != null'>username=#{username},</if>",
+            "    <if test='password != null'>password=#{password},</if>",
+            "    <if test='email != null'>email=#{email},</if>",
+            "    <if test='bio != null'>bio=#{bio}</if>",
+            "  </set>",
+            "where id=#{id}",
+            "</script>"})
+    void updateAuthorValues(Student author);
+
     //int updateById(int id);
 
     //int deleteById(int id);

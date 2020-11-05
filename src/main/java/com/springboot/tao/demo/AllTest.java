@@ -1,51 +1,29 @@
 package com.springboot.tao.demo;
 
 import com.springboot.tao.configer.MyAnnotaion.TestAnnotaion;
-import com.springboot.tao.configer.dbConfig.WriteAnnotation;
-import com.sun.istack.internal.NotNull;
-import org.elasticsearch.search.aggregations.metrics.ParsedSingleValueNumericMetricsAggregation;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.AnnotatedElementUtils;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedType;
-import java.lang.reflect.Method;
-import java.util.Date;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author taozhiwei
  * @date 2020/8/14 13:23
+ *
+ * 1.非final变量在构造函数中初始化会出现指令重排，可能赋值操作在构造函数执行完后再赋值
+ * 2.obj = new AllTest ();可以先初始化构造函数，然后在赋值引用，最后赋值非final变量，这样会导致其他现在拿到该对象时候没有初始化非final变量
+ *
+ * 3.初次读对象引用与初次读该对象包含的final域，这两个操作之间存在间接依赖关系。由于 编译器遵守间接依赖关系，因此编译器不会重排序这两个操作
  */
 @TestAnnotaion
-public class AllTest{
+public class AllTest {
 
     public static void main(String[] args) {
-        System.out.println(go(2));
-    }
+        String[] str = {"a", "b", "c"};
+        List<String> strings = Arrays.asList(str);
+       strings.forEach(s ->{});
 
-    public static int go(int x){
-        double d = 100;
-        long a = 22;
-        Long b = 333L;
-        int j=0;
-        switch (3) {
-            case 1:j++;
-            default:j++;
-            case 2:j++;
-        }
-        //2
-        return j;
     }
 }
 
-class Father{
-    private String name ;
-
-    public final void mm(){
-        double a = 10;
-        System.out.println(name);
-    }
-
-}
 
 

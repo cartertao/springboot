@@ -7,4 +7,12 @@
     <select id="selectByName" parameterType="string" resultType="Student">
         select * from student where name = #{value}
     </select>
+
+<!--
+    <select id="selectBlogsLike" resultType="Blog">
+        <bind name="pattern" value="'%' + _parameter.getTitle() + '%'" />
+        SELECT * FROM BLOG
+        WHERE title LIKE #{pattern}
+    </select>
+-->
 </mapper>
