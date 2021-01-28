@@ -73,3 +73,6 @@ test2:
   mysql:
     name: taozhiwei2
     password: 22222
+
+#logging:
+#  config: classpath:log4j2-dev.xml
