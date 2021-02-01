@@ -21,6 +21,9 @@ public class TestClass {
         reflectionSonClass.getConstructor(String.class);
         reflectionSonClass.getDeclaredConstructor(String.class);
 
+        //判断该类是否是内部类 true是内部类，可以判断Student::getName生成的内部类对象
+        boolean synthetic = reflectionSonClass.isSynthetic();
+
         Field[] declaredFields = reflectionSonClass.getDeclaredFields();
         Field[] fields = reflectionSonClass.getFields();
         Field name = reflectionSonClass.getField("name");
