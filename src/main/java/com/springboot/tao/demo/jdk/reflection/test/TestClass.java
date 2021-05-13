@@ -3,6 +3,7 @@ package com.springboot.tao.demo.jdk.reflection.test;
 import com.springboot.tao.demo.jdk.reflection.ReflectionSon;
 import org.springframework.context.annotation.Bean;
 
+import java.lang.invoke.SerializedLambda;
 import java.lang.reflect.*;
 import java.net.URL;
 
@@ -66,5 +67,12 @@ public class TestClass {
         //获取父类、接口
         Class<? super ReflectionSon> superclass = reflectionSonClass.getSuperclass();
         reflectionSonClass.getInterfaces();
+
+        //lambda获取lambda对象的方法名称 可以拿到getAddress实现方法的名称
+/*        SFunction<LspLevelOneDo, String> getId = LspLevelOneDo::getAddress;
+        Method writeReplace = getId.getClass().getDeclaredMethod("writeReplace");
+        writeReplace.setAccessible(true);
+        Object invoke = writeReplace.invoke(getId);
+        SerializedLambda obj = (SerializedLambda)invoke;*/
     }
 }
