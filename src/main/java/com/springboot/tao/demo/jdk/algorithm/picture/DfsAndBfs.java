@@ -1,10 +1,6 @@
-package com.springboot.tao.demo.jdk.algorithm;
+package com.springboot.tao.demo.jdk.algorithm.picture;
 
-import io.swagger.models.auth.In;
-
-import javax.management.Query;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -49,6 +45,9 @@ public class DfsAndBfs {
         }
     }
 
+    /**
+     * 广度优先遍历
+     */
     LinkedList<Integer> queue = new LinkedList<>();
     public void bfs(int[][] arr) {
         int start = 0;
