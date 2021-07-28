@@ -1,9 +1,6 @@
 package com.springboot.tao.demo.spring;
 
 import com.springboot.tao.configer.MybatisConfig;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
-import lombok.Data;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.context.annotation.Bean;
 
@@ -32,7 +29,7 @@ public class SpringTestSon extends SpringTestFather<SpringTestBean> implements S
 
     @Override
     @Bean("aaa")
-    public String getInterface(@NotNull String str, @Param("aa") ArrayList<Long> list) {
+    public String getInterface(String str, @Param("aa") ArrayList<Long> list) {
         return str;
     }
 

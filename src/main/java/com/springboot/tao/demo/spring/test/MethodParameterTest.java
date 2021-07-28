@@ -1,12 +1,8 @@
 package com.springboot.tao.demo.spring.test;
 
 import com.springboot.tao.demo.spring.SpringTestSon;
-import com.sun.istack.internal.Nullable;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.MethodParameter;
-import org.springframework.core.ParameterNameDiscoverer;
-import org.springframework.jdbc.core.ParameterDisposer;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
