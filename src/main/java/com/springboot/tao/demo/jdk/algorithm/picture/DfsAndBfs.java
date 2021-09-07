@@ -1,6 +1,7 @@
 package com.springboot.tao.demo.jdk.algorithm.picture;
 
 import java.util.LinkedList;
+import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -89,7 +90,34 @@ public class DfsAndBfs {
         DfsAndBfs dfsAndBfs = new DfsAndBfs();
         //dfsAndBfs.dfs(arr, 0);
 
-        dfsAndBfs.queue.add(0);
-        dfsAndBfs.bfs(arr);
+        //dfsAndBfs.queue.add(0);
+        //dfsAndBfs.bfs(arr);
+
+        dfsAndBfs.dfsString("abc".toCharArray(), 0);
+        dfsAndBfs.dfsString("abc".toCharArray(), 1);
+        dfsAndBfs.dfsString("abc".toCharArray(), 2);
+    }
+
+    /**
+     * 全排列
+     * @param str
+     */
+    private Stack<Integer> stack1 = new Stack<>();
+    public void dfsString(char[] arr, int index) {
+        stack1.add(index);
+        for (int i = 0; i < arr.length; i++) {
+            if(stack1.contains(i))
+                continue;
+            else {
+                dfsString(arr, i);
+            }
+        }
+        if( stack1.size() == arr.length) {
+            for (int j = 0; j < stack1.size(); j++) {
+                System.out.print(stack1.get(j));
+            }
+            System.out.println("---");
+        }
+        stack1.pop();
     }
 }

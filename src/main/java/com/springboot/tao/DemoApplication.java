@@ -15,9 +15,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ServletComponentScan("com.springboot.tao.configer.filters")
 @EnableTransactionManagement
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
+
 public class DemoApplication {
 
 	public static void main(String[] args) { SpringApplication.run(DemoApplication.class, args);
+
 	}
 
 }
