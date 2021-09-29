@@ -1,6 +1,7 @@
 package com.springboot.tao.demo;
 
 import com.springboot.tao.configer.MyAnnotaion.TestAnnotaion;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +22,11 @@ public class AllTest {
         String[] str = {"a", "b", "c"};
         List<String> strings = Arrays.asList(str);
        strings.forEach(s ->{});
+
+    }
+
+    @Bean(name = "dd")
+    public void test() {
 
     }
 }

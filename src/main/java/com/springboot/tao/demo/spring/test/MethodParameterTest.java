@@ -20,6 +20,7 @@ public class MethodParameterTest {
         Method method = clazz.getDeclaredMethod("getInterface", String.class, ArrayList.class);
         Method testMethod = clazz.getDeclaredMethod("testMethod");
         //MethodParameter是把方法的所有参数和返回值都进行了保存，只是有个索引来确定是哪个参数，
+        // 如果方法没有参数则索引为-1
         MethodParameter methodParameter = new MethodParameter(method, 1);
         //获取参数索引 -1为返回值
         int parameterIndex = methodParameter.getParameterIndex();
