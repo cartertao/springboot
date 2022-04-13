@@ -51,7 +51,7 @@ public class TestClass {
         //返回该class类的接口，以注解类表示该接口（可以实现多个接口所以数组），并不是得到父类的注解
         AnnotatedType[] annotatedInterfaces = reflectionSonClass.getAnnotatedInterfaces();
 
-        //泛型
+        //泛型 方法和属性也一样 Field.getGenericSuperclass()
         //返回继承的父类的类型，并包含父类的泛型，如果父类又继承了其他类，不会返回其他类，只会返回上一层父类
         //如果没有继承则返回顶级父类Object类
         Type type = reflectionSonClass.getGenericSuperclass();

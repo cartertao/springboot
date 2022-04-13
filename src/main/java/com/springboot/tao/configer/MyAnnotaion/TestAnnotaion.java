@@ -15,5 +15,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Service
 public @interface TestAnnotaion {
-
+    String age() default "tao";
 }

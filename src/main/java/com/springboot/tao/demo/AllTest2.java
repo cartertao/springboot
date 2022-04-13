@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
  * @Author: carter
  * @Date: 2021/9/29
  */
+
 public class AllTest2 extends AllTest {
 
-    @TestAnnotaion
+    @TestAnnotaion(age = "zhi")
     @Override
     public void test() {
         super.test();

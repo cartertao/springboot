@@ -22,7 +22,6 @@ import java.io.IOException;
 public class SwaggerController {
 
     @ApiOperation(value = "方法解释", notes = "notes", httpMethod = "GET")
-    @GetMapping("/doc")
     @ApiResponses(value = { @ApiResponse(code = 1000, message = "成功"),
                             @ApiResponse(code = 1001, message = "失败"),
                             @ApiResponse(code = 1002, response = Student.class,message = "缺少参数") })
@@ -30,6 +29,7 @@ public class SwaggerController {
             @ApiImplicitParam(paramType = "int", name = "doc", value = "doc", example = "doc", allowableValues = "range[1,5]"),
             //@ApiImplicitParam(paramType = "student", name = "student", value = "student", required = true)
     })
+    @GetMapping("/doc")
     public Student info(@Param("doc")int doc, Student student){
         return student;
     }
